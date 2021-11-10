@@ -1,22 +1,25 @@
 package com.gorajski.broccoliblogjavaspring.controllers;
 
 import com.gorajski.broccoliblogjavaspring.models.Entry;
-import com.gorajski.broccoliblogjavaspring.repositories.EntryRepository;
+import com.gorajski.broccoliblogjavaspring.services.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class EntryController {
 
     @Autowired
-    EntryRepository repo;
+    EntryService service;
 
     @RequestMapping("/entries")
-    public List<Entry> getEntries() {
-        return (List<Entry>) repo.findAll();
-    }
+    public String getEntries(ModelMap modelMap) {
+        List<Entry> entries =  service.findAll();
+        modelMap.put("entries", entries);
 
+        return "index";
+    }
 }

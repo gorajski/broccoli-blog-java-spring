@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Broccoli Blog</title>
+    <link href="header.css" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="~{header :: header}"></div>
+    <h1>Welcome to the Broccoli Blog</h1>
+    <ul>
+        <li th:each="entry:${entries}">
+            <div th:text="${entry.title}">Title</div>
+            <div th:text="${entry.body}">Body</div>
+        </li>
+    </ul>
+</body>
+</html>

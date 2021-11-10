@@ -1,0 +1,7 @@
+#header-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 316px;
+    background-color: palegreen;
+}
