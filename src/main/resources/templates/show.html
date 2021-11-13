@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Broccoli Blog</title>
+    <link href="/layout.css" rel="stylesheet">
+    <link href="/header.css" rel="stylesheet">
+</head>
+<body>
+<div th:insert="~{header :: header}"></div>
+<div>
+    <h1 th:text="${entry.title}">What's this become?</h1>
+    <div th:text="${entry.body}"></div>
+</div>
+
+</body>
+</html>

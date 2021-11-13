@@ -2,4 +2,7 @@ spring:
   datasource:
     username: sa
     password: pass
-
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
