@@ -41,7 +41,7 @@ public class EntryController {
 
 
     @RequestMapping(value = "/entries", method = RequestMethod.POST)
-    public String postEntry(@RequestParam("title") String title, @RequestParam("body") String body) {
+    public String createEntry(@RequestParam("title") String title, @RequestParam("body") String body) {
         log.info("POST /entries called.");
         service.create(title, body);
 
@@ -72,5 +72,13 @@ public class EntryController {
         service.update(id, title, body);
 
         return "redirect:/entries/" + id;
+    }
+
+    @RequestMapping(value = "/entries/{id}", method = RequestMethod.DELETE)
+    public String deleteEntry(@PathVariable("id") Long id) {
+        log.info("DELETE /entries/" + id + "called.");
+        service.delete(id);
+
+        return "redirect:/entries";
     }
 }

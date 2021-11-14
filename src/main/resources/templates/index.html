@@ -8,10 +8,12 @@
 <body>
     <div th:insert="~{header :: header}"></div>
     <h1>Welcome to the Broccoli Blog</h1>
+    <div>
+        <a href="/entries/new">Add</a>
+    </div>
     <ul>
         <li th:each="entry:${entries}">
-            <div th:text="${entry.title}">Title</div>
-            <div th:text="${entry.body}">Body</div>
+            <a th:href="|/entries/${entry.id}|" th:text="${entry.title}"></a>
         </li>
     </ul>
 </body>

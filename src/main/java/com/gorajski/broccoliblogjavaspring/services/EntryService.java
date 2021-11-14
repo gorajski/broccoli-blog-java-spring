@@ -35,4 +35,8 @@ public class EntryService {
         entry.get().setBody(body);
         repo.save(entry.get());
     }
+
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
 }

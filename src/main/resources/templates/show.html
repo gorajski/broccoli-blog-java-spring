@@ -8,6 +8,13 @@
 <body>
 <div th:insert="~{header :: header}"></div>
 <div>
+    <a th:href="|/entries/${entry.id}/edit|">Edit</a>
+    <form th:action="|/entries/${entry.id}|" th:method="delete">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="submit" value="Delete">
+    </form>
+</div>
+<div>
     <h1 th:text="${entry.title}">What's this become?</h1>
     <div th:text="${entry.body}"></div>
 </div>
