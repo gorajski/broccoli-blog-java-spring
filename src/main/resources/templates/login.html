@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Broccoli Blog</title>
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+</head>
+<body>
+<h1>Welcome to the Broccoli Blog</h1>
+<form th:action="@{/login}" method="post">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username"/>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password"/>
+    <input type="submit" value="Log in">
+</form>
+</body>
+</html>

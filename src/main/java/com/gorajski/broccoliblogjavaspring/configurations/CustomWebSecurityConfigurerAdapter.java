@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 @Configuration
@@ -21,15 +20,29 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     private static final Logger log = LoggerFactory.getLogger(CustomWebSecurityConfigurerAdapter.class);
 
     @Autowired
-    public void configureAuthManager(AuthenticationManagerBuilder auth) {
-        try {
-            auth
-                    .inMemoryAuthentication()
-                    .withUser("u").password(passwordEncoder().encode("p"))
-                    .authorities("ROLE_USER");
-        } catch (Exception e) {
-            log.info("Something went wrong: " + e);
-        }
+    public void configureAuthManager(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("u").password(passwordEncoder().encode("p"))
+                .authorities("ROLE_USER");
+    }
+
+    @Autowired
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/images/**", "/css/**").permitAll()
+                .antMatchers("/entries").hasAnyRole("USER").anyRequest().authenticated()
+
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/entries")
+                .permitAll()
+
+                .and()
+                .logout()
+                .permitAll();
     }
 
     @Bean
